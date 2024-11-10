@@ -28,6 +28,14 @@ npm init -y
 Install dependencies:
 npm install bcryptjs cookie-parser cors dotenv express ioredis jsonwebtoken mongoose ts-node-dev @types/bcryptjs @types/cookie-parser @types/cors @types/express @types/jsonwebtoken @types/node typescript --save-dev
 
+install ejs
+npm i ejs
+npm i --save-dev @types/ejs
+
+install mailer
+npm i nodemailer
+npm i --save-dev @types/nodemailer
+
 Ensure TypeScript is installed:
 npm install typescript --save-dev
 
