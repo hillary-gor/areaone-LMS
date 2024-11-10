@@ -16,7 +16,7 @@ interface IRegistrationBody {
   avatar?: string;
 }
 
-export const resgistrationUser = CatchAsyncError(
+export const registrationUser = CatchAsyncError(
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { name, email, password } = req.body;
