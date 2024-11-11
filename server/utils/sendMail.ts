@@ -13,7 +13,7 @@ interface EmailOptions {
 const sendEmail = async (options: EmailOptions): Promise<void> => {
   const transporter: Transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
-    port: parseInt(process.env.SMTP_PORT || '587'),
+    port: parseInt(process.env.SMTP_PORT || "587"),
     service: process.env.SMTP_SERVICE,
     auth: {
       user: process.env.SMTP_USER,
@@ -24,11 +24,7 @@ const sendEmail = async (options: EmailOptions): Promise<void> => {
   const { email, subject, template, data } = options;
 
   // get path to the email template
-  const templatePath = path.join(
-    __dirname,
-    "../mails/activation-mail.ejs",
-    template
-  );
+  const templatePath = path.join(__dirname, "../mails", template);
 
   // render the email template with ejs
   const html = await ejs.renderFile(templatePath, data);
