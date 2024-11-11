@@ -67,7 +67,7 @@ export const registrationUser = CatchAsyncError(
 
 interface IActivationToken {
   token: string;
-  activationCode: String;
+  activationCode: string;
 }
 
 export const createActivationToken = (user: any): IActivationToken => {

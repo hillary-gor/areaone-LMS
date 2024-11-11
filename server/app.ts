@@ -19,6 +19,7 @@ app.use(
   })
 );
 
+//routes
 app.use("/api/v1",userRouter);
 
 // testing api
