@@ -86,3 +86,17 @@ export const createActivationToken = (user: any): IActivationToken => {
 
   return { token, activationCode };
 };
+
+// activate user
+interface IActivationRequest{
+  activation_token: string;
+  activation_code: string;
+}
+
+export const activateUser = CatchAsyncError(async(req:Request,res:Response,next:NextFunction) =>{
+  try {
+    
+  } catch (error:any) {
+    return next(new ErrorHandler(error.message, 400));
+  }
+})
