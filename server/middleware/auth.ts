@@ -2,8 +2,9 @@ import { Request, Response, NextFunction } from "express";
 import { CatchAsyncError } from "./catchAsyncErrors";
 import ErrorHandler from "../utils/ErrorHandler";
 import jwt, { JwtPayload } from "jsonwebtoken";
-import { decode } from "punycode";
+import { redis } from "../utils/redis";
 
+// authenticated user
 export const isAuthenticated = CatchAsyncError(
   async (req: Request, res: Response, next: NextFunction) => {
     const access_token = req.cookies.access_token;
@@ -17,12 +18,17 @@ export const isAuthenticated = CatchAsyncError(
       process.env.ACCESS_TOKEN as string
     ) as JwtPayload;
 
-    if (!decoded) {
+    if (!decoded || !decoded.id) {
       return next(new ErrorHandler("Invalid access token", 400));
     }
 
-    req.user = JSON.parse(user);
+    // Fetch user data from Redis
+    const user = await redis.get(decoded.id);
+    if (!user) {
+      return next(new ErrorHandler("User not found", 400));
+    }
 
+    req.user = JSON.parse(user); // Ensure user data is parsed from Redis
     next();
   }
 );
