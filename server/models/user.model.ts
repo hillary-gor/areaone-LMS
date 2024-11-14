@@ -76,15 +76,14 @@ userSchema.pre<IUser>("save", async function (next) {
 });
 
 // sign access token
-userSchema.methods.SignAccessToken = function (): string {
-  const options: SignOptions = { expiresIn: '15m' };
-  return jwt.sign({ id: this._id }, process.env.ACCESS_TOKEN || '', options);
+userSchema.methods.SignAccessToken = function () {
+  return jwt.sign({ id: this._id }, process.env.ACCESS_TOKEN || '');
 };
 
+
 // sign refresh token
-userSchema.methods.SignRefreshToken = function (): string {
-  const options: SignOptions = { expiresIn: '7d' };
-  return jwt.sign({ id: this._id }, process.env.REFRESH_TOKEN || '', options);
+userSchema.methods.SignRefreshToken = function () {
+  return jwt.sign({ id: this._id }, process.env.REFRESH_TOKEN || '');
 };
 
 // compare password
